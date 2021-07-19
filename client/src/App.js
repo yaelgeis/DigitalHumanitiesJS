@@ -5,6 +5,9 @@ import logo from "./logo.svg";
 import "./App.css";
 import Datepicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+
 
 function App() {
   let [data, setData] = React.useState(null);
@@ -77,46 +80,13 @@ function App() {
         <option value="אישים">אישים</option>
       </select><label for="col-dropdown">:בחר סנן</label><br></br><><input ref={textInput} type="text" />
       <button onClick={textFilterClickHandler}>סנן לפי מחרוזת</button><br></br>
-        <div className="container">{!data ? "Loading..." :
-          <><h1>יוני 2021</h1><table class="styled-table">
-            <thead>
-              <tr>
-                <th>אישים</th>
-                <th>תיאור</th>
-                <th>מספר תיק לציטוט</th>
-                <th>סטטוס חשיפה</th>
-                <th>מספר תיק ישן</th>
-                <th>מספר מסמכים בתיק</th>
-                <th>סוג התיק</th>
-                <th>גופים</th>
-                <th>קישור</th>
-                <th>תקופת החומר עד</th>
-                <th>תקופת החומר מ</th>
-                <th>מיקום גוף יוצר</th>
-                <th>כותרת</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item) => (
-                <tr key={beautify(item.אישים)} class="active-row">
-                  <td>{beautify(item.אישים)}</td>
-                  <td>{beautify(item.תיאור)}</td>
-                  <td>{beautify(item["מספר תיק לציטוט"])}</td>
-                  <td>{beautify(item["סטטוס חשיפה"])}</td>
-                  <td>{beautify(item["מספר תיק ישן"])}</td>
-                  <td>{beautify(item["מספר מסמכים בתיק"])}</td>
-                  <td>{beautify(item["סוג התיק"])}</td>
-                  <td>{beautify(item.גופים)}</td>
-                  <td>{beautify(item.קישור)}</td>
-                  <td>{toDateStr(item["תקופת החומר עד"])}</td>
-                  <td>{toDateStr(item["תקופת החומר מ"])}</td>
-                  <td>{beautify(item["מיקום גוף יוצר"])}</td>
-                  <td>{beautify(item.כותרת)}</td>
-                  <td />
-                </tr>
-              ))}
-            </tbody>
-          </table></>}</div></></>
+        <div className="container">
+          {!data ? "Loading..." :
+          <><h1>יוני 2021</h1>
+          {buildTable(data)}
+          </>
+          }
+          </div></></>
   );
 
 }
@@ -128,6 +98,48 @@ function toDateStr(date){
 
 const beautify = (str) => {return str === null ? str : str.substring(1, str.length-1) }
 
-
+function buildTable(data){
+    return (
+    <Table>
+      <Thead>
+        <Tr>
+          <Th>אישים</Th>
+          <Th>תיאור</Th>
+          <Th>מספר תיק לציטוט</Th>
+          <Th>סטטוס חשיפה</Th>
+          <Th>מספר תיק ישן</Th>
+          <Th>מספר מסמכים בתיק</Th>
+          <Th>סוג התיק</Th>
+          <Th>גופים</Th>
+          <Th>קישור</Th>
+          <Th>תקופת החומר עד</Th>
+          <Th>תקופת החומר מ</Th>
+          <Th>מיקום גוף יוצר</Th>
+          <Th>כותרת</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+      {data.map((item) => (
+          <Tr>
+            <Td>{beautify(item.אישים)}</Td>
+            <Td>{beautify(item.תיאור)}</Td>
+            <Td>{beautify(item["מספר תיק לציטוט"])}</Td>
+            <Td>{beautify(item["סטטוס חשיפה"])}</Td>
+            <Td>{beautify(item["מספר תיק ישן"])}</Td>
+            <Td>{beautify(item["מספר מסמכים בתיק"])}</Td>
+            <Td>{beautify(item["סוג התיק"])}</Td>
+            <Td>{beautify(item.גופים)}</Td>
+            <Td><a href={beautify(item.קישור)} target="_blank">קישור</a></Td>
+            <Td>{toDateStr(item["תקופת החומר עד"])}</Td>
+            <Td>{toDateStr(item["תקופת החומר מ"])}</Td>
+            <Td>{beautify(item["מיקום גוף יוצר"])}</Td>
+            <Td>{beautify(item.כותרת)}</Td>
+          </Tr>
+        ))}
+      </Tbody>
+    </Table>
+  );
+  
+}
 
 export default App;
