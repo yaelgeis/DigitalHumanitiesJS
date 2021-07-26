@@ -12,7 +12,10 @@
   "dependencies": {
     "create-react-app": "^4.0.3",
     "express": "^4.17.1",
+    "fast-csv": "^4.3.6",
+    "json2csv": "^5.0.6",
     "mongoose": "^5.13.3",
+    "mongoose-to-csv": "^0.1.1",
     "react-datepicker": "^4.1.1",
     "react-super-responsive-table": "^5.2.0"
   },
