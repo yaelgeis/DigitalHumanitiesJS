@@ -461,16 +461,17 @@ td {
 /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
 
 #col-dropdown-text{
-  /* padding-left: 55px;
-  text-align: center; */
   display: absolute;
   float: right;
-  /* padding-left: 20px; */
   margin-right: auto;
   text-align: center;
+  padding-right: 50%;
+
 
   
 }
+
+
 
 select{
   text-align: center;
@@ -479,32 +480,14 @@ select{
 }
 #text-filter-btn{
   padding-left: 12px;
-  height: 20px;
-  width: 165px;
+  height: 30px;
+  width: 160px;
   padding-top: 2px;
   text-align: center;
 
 }
 
-#select-div{
-  /* display: flex;
-  padding-left: 15%;
-  padding-top: 6%;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-direction: row-reverse; */
 
-    /* display: flex; */
-    display: flex; 
-    position: absolute;
-    padding-right: 13%;
-    /* direction: rtl; */
-    padding-top: 6%;
-    padding-inline-start: 68%;
-
-}
 #text-div{
   padding-left: 75%;
   text-align: center;
@@ -513,10 +496,22 @@ select{
 
 }
 
+#filter-div{
+    /* display: flex; */
+    display:  inline-block; 
+    /* position: absolute; */
+    padding-left: 15%;
+    width: 50%;
+    /* direction: rtl; */
+    padding-top: 6%;
+}
+
 #date-div{
   /* display: flex; */
-  position: absolute;
+  display:  inline-block; 
+  /* position: absolute; */
   padding-left: 15%;
+  width: 50%;
   /* direction: rtl; */
   padding-top: 6%;
 
@@ -537,15 +532,36 @@ select{
 }
 
 #text-box{
-  text-align: center;
+  /* text-align: center; */
   float: left;
-  margin-left: auto;
+  /* margin-left: auto; */
+  width: 10%;
+  top: 10%;
+}
+
+#text-box2{
+  /* margin-left: auto; */
+  width: 35%;
+  display: inline-block
+  
+}
+
+#insert-text{
+  display: absolute;
+  float: right;
+  margin-right: auto;
+
+  padding-right: 50%;
+
+  /* text-align: center; */
+  /* padding-left: 5%;
+  padding-bottom: 5%; */
 }
 
 #start-date{
     display: absolute;
     float: right;
-    /* padding-left: 20px; */
+    padding-right: 40%;
     margin-right: auto;
     text-align: center;
 
@@ -555,20 +571,15 @@ select{
 #end-date{
   display: absolute;
   float: right;
-  /* padding-left: 1px; */
+  padding-right: 40%;
   margin-right: auto;
   text-align: center;
 }
 
-#insert-text{
-  display: absolute;
-  float: right;
-  margin-right: auto;
-  text-align: center;
-}
+
 
 #container{
-  padding-top: 150px;
+  padding-top: 2%;
 }
 
 
@@ -579,12 +590,48 @@ option{
 
 }
 
+#select-div{
+
+  display: flex; 
+  position: absolute;
+  padding-right: 13%;
+  /* direction: rtl; */
+  padding-top: 8%;
+  padding-inline-start: 68%;
+
+}
+
+#text-input{
+  flex-direction: column-reverse;
+  display: flex; 
+  position: absolute;
+  padding-right: 13%;
+  /* direction: rtl; */
+  padding-top: 8.6%;
+  padding-inline-start: 68%;
+  margin: 0;
+
+}
+
+#filter-text{
+  display:  inline-block; 
+  /* position: absolute; */
+  padding-right: 13%;
+  /* direction: rtl; */
+  /* padding-top: 11.5%; */
+  padding-top: 11.5%;
+  width: 50%;
+  padding-inline-start: 68%;
+  margin: 0;
+
+}
+
 select {
   appearance: none;
   background-color: transparent;
   padding-left: 15px;
   margin: 0;
-  width: 165px;
+  width: 35%;
   font-family: inherit;
   font-size: inherit;
   cursor: inherit;
@@ -592,6 +639,7 @@ select {
   text-align: center;
   text-align-last: center;
   direction: rtl;
+  
 }
 
 select::-ms-expand {

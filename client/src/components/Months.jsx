@@ -17,18 +17,19 @@ function Months() {
 
   let collection = window.location.search.substr(6); // returns "?item=<collection>"
 
-  React.useEffect(() => {
-    const requestOptions = {
-      method: 'POST',
-      body: JSON.stringify({collection: `${collection}` }),
-      headers: {"Content-Type": "application/json"}
-    }; 
+ 
+    React.useEffect(() => {
+      const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify({collection: `${collection}` }),
+        headers: {"Content-Type": "application/json"}
+      }; 
+      fetch('/months/getTable', requestOptions)
+        .then((res) => res.json())
+        .then((data) => setData(data.items));
 
-    fetch('/months/getTable', requestOptions)
-      .then((res) => res.json())
-      .then((data) => setData(data.items));
-
-    }, []);
+      }, []);
+        
 
   let textFilterClickHandler = (e) => {
     let str = textInput.current.value; 
@@ -39,7 +40,6 @@ function Months() {
       body: JSON.stringify({filterStr: true, collection: `${collection}`, col: `${col}`, str: `${str}` }),
       headers: {"Content-Type": "application/json"}
     }; 
-
     fetch(`/months/filter`, requestOptions)
       .then((res) => res.json())
       .then((data) => setData(data.items));
@@ -67,36 +67,36 @@ function Months() {
       .then((data2) => {
         setData2(data2.csv)
 
-          let hiddenElement = document.createElement('a');
-          hiddenElement.href = 'data:text/csv;charset=utf-8' + encodeURIComponent(data2.csv);
-          hiddenElement.target = '_blank';
-          hiddenElement.download = collection + ".csv";
-          console.log(data2.csv)
-          hiddenElement.click();  
+          // let hiddenElement = document.createElement('a');
+          // hiddenElement.href = 'data:text/csv;charset=utf-8' + encodeURIComponent(data2.csv);
+          // hiddenElement.target = '_blank';
+          // hiddenElement.download = collection + ".csv";
+          // console.log(data2.csv)
+          // hiddenElement.click();  
+
+          //---------------
+          var blob = new Blob([data2.csv]);
+          if (window.navigator.msSaveOrOpenBlob){
+            window.navigator.msSaveBlob(blob, collection + ".csv");
+          }
+          else {
+            var a = window.document.createElement("a");
+
+            a.href = window.URL.createObjectURL(blob, {
+              type: "text/plain"
+            });
+            a.download = collection + ".csv";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }
       })
   };
 
 
   return (
     <>
-    <div id="select-div">
-      <p id="col-dropdown-text">:בחר סנן</p>
-      <select name="col-dropdown" id="col-dropdown">
-          <option value="כותרת">כותרת</option>
-          <option value="מיקום גוף יוצר">מיקום גוף יוצר</option>
-          <option value="גופים">גופים</option>
-          <option value="סוג התיק">סוג התיק</option>
-          <option value="מספר תיק ישן">מספר תיק ישן</option>
-          <option value="סטטוס חשיפה">סטטוס חשיפה</option>
-          <option value="מספר תיק לציטוט">מספר תיק לציטוט</option>
-          <option value="תיאור">תיאור</option>
-          <option value="אישים">אישים</option>
-        </select><label for="col-dropdown"></label>
-        <p id="insert-text">:הזן טקסט</p>
-        <input ref={textInput} type="text" id="text-box" />
-        <button class="n-btn" id="text-filter-btn" onClick={{textFilterClickHandler}}>סנן לפי מחרוזת</button><br></br>
-      </div>
-      <div id="date-div">
+    <div id="date-div">
       <p id="start-date">:תאריך התחלה</p>
 
         <Datepicker id="first-datepicker"
@@ -122,6 +122,32 @@ function Months() {
          <br></br>
     <button class="n-btn" id="text-filter-btn" onClick={dateFilterClickHandler}>סנן לפי תאריכים</button>
     </div>
+    <div id="filter-div">
+    {/* <div id="select-div"> */}
+      <p id="col-dropdown-text">:בחר סנן</p>
+      <select /*name="col-dropdown"*/ id="col-dropdown">
+          <option value="כותרת">כותרת</option>
+          <option value="מיקום גוף יוצר">מיקום גוף יוצר</option>
+          <option value="גופים">גופים</option>
+          <option value="סוג התיק">סוג התיק</option>
+          <option value="מספר תיק ישן">מספר תיק ישן</option>
+          <option value="סטטוס חשיפה">סטטוס חשיפה</option>
+          <option value="מספר תיק לציטוט">מספר תיק לציטוט</option>
+          <option value="תיאור">תיאור</option>
+          <option value="אישים">אישים</option>
+        </select><label for="col-dropdown"></label>
+        {/* </div> */}
+        <br></br>
+        {/* <div id="text-input"> */}
+        <p id="insert-text">:הזן טקסט</p>
+        <input ref={textInput} type="text" id="text-box2" ></input>
+        {/* </div> */}
+        {/* <div id="filter-text">       */}
+        <br></br>
+        <button class="n-btn" id="text-filter-btn" onClick={textFilterClickHandler}>סנן לפי מחרוזת</button><br></br>
+        {/* </div> */}
+        </div>
+      
     <br></br>
         <div id="container">
         <button class="n-btn" id="text-filter-btn" onClick={downloadClickHandler}>יצא לקובץ csv</button>

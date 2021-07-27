@@ -17,6 +17,7 @@
     "mongoose": "^5.13.3",
     "mongoose-to-csv": "^0.1.1",
     "react-datepicker": "^4.1.1",
+    "react-script": "^2.0.5",
     "react-super-responsive-table": "^5.2.0"
   },
   "devDependencies": {},
