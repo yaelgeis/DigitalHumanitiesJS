@@ -46,9 +46,6 @@ var schema = new Schema(
     }, 
     {strict: false}
 );
-schema.plugin(mongooseToCsv, {
-    headers:'סוג_התיק מיקום_גוף_יוצר מספר_תיק_ישן סטטוס_חשיפה מספר_מסמכים_בתיק גופים תקופת_החומר_עד תקופת_החומר_מ תיאור אישים כותרת קישור'
-});
 
 app.get("/getList", (req, res) => { 
     res.json({cols: col_names});
@@ -121,20 +118,15 @@ async function filterDate(model, start, end, res){
 }
 
 function exportToCsv(req,res){
-    let a = true;
     let csv = "סוג התיק\tמיקום גוף יוצר\tמספר תיק ישן\tסטטוס חשיפה\tגופים\tתקופת החומר עד\tתקופת החומר מ\tתיאור\tאישים\tכותרת\tקישור\n"
     last_items.forEach((element) => {csv += getAsCsv(element)})
     console.log(csv)
     res.send({csv: csv})
-
-  
-    
 }
 
 const getAsCsv = (temp) => {
     const headers = ["סוג התיק","מיקום גוף יוצר","מספר תיק ישן","סטטוס חשיפה" ,"גופים","תקופת החומר עד","תקופת החומר מ","תיאור","אישים","כותרת","קישור"];
     let dict = JSON.parse(JSON.stringify({temp : temp}))["temp"] //to bypass the date issue
-
     let str = "";
     headers.forEach((element) =>{
         if (dict[element] === null || dict[element] === undefined)

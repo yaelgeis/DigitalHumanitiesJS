@@ -112,4 +112,6 @@ def main(url):
 
 
 if __name__ == '__main__':
+    sys.stderr = open("err.txt", 'w')
+    sys.stdout = open("log.txt", 'w')
     main(sys.argv[1])
