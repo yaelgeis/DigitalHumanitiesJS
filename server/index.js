@@ -3,18 +3,25 @@
 const express = require("express");
 const {spawn} = require('child_process');
 const mongooseToCsv = require("mongoose-to-csv");
+const CryptoJS = require("crypto-js");
+
 
 const app = express();
-// app.use(express.static("public"))
 app.use(express.json());
 app.use(express.urlencoded());
 
 const PORT = 3001;
-const dbURI = "mongodb+srv://Digital:igaleyaelgeis@cluster0.qofyt.mongodb.net/Recently-Uploaded-Files?retryWrites=true&w=majority";
+
+const decrypt = (data) => {
+    return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
+};
+
+const dbURI = decrypt("bW9uZ29kYitzcnY6Ly9EaWdpdGFsOmlnYWxleWFlbGdlaXNAY2x1c3RlcjAucW9meXQubW9uZ29kYi5uZXQvUmVjZW50bHktVXBsb2FkZWQtRmlsZXM/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5");
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 mongoose.connect(dbURI);
+
 
 var col_names = []
 mongoose.connection.on('open', function (ref) {

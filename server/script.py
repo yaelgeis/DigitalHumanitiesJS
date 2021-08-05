@@ -1,4 +1,5 @@
 import sys
+import base64
 
 import requests
 import pymongo
@@ -79,7 +80,10 @@ def to_date(date_str):
 
 
 def get_database():
-    CONNECTION_STRING = "mongodb+srv://Digital:igaleyaelgeis@cluster0.qofyt.mongodb.net/Recently-Uploaded-Files?retryWrites=true&w=majority"
+    base64_message = 'bW9uZ29kYitzcnY6Ly9EaWdpdGFsOmlnYWxleWFlbGdlaXNAY2x1c3RlcjAucW9meXQubW9uZ29kYi5uZXQvUmVjZW50bHktVXBsb2FkZWQtRmlsZXM/cmV0cnlXcml0ZXM9dHJ1ZSZ3PW1ham9yaXR5'
+    base64_bytes = base64_message.encode('ascii')
+    message_bytes = base64.b64decode(base64_bytes)
+    CONNECTION_STRING = message_bytes.decode('ascii')
     client = pymongo.MongoClient(CONNECTION_STRING)
     return client['Recently-Uploaded-Files']
 
