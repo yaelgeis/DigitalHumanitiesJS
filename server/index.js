@@ -5,6 +5,7 @@ const {spawn} = require('child_process');
 const mongooseToCsv = require("mongoose-to-csv");
 
 const app = express();
+// app.use(express.static("public"))
 app.use(express.json());
 app.use(express.urlencoded());
 
